@@ -6,24 +6,28 @@
   <title>Campus Information Portal</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header class="site-header">
   <nav class="navbar">
-    <div class="brand">Campus Portal</div>
+    <a class="brand" href="#introduction">Campus Portal</a>
 
-    <ul class="nav-menu">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+      <span class="menu-toggle-bar"></span>
+      <span class="menu-toggle-bar"></span>
+      <span class="menu-toggle-bar"></span>
+      <span class="sr-only">Toggle navigation menu</span>
+    </button>
+
+    <ul class="nav-menu" id="nav-menu">
       <li><a href="#introduction">Home</a></li>
-
       <li class="dropdown">
-        <a href="#">Campus</a>
+        <a href="#services" aria-haspopup="true">Campus</a>
         <ul class="dropdown-content">
           <li><a href="#services">Services</a></li>
           <li><a href="#locations">Locations</a></li>
         </ul>
       </li>
-
       <li><a href="#announcements">Announcements</a></li>
       <li><a href="#display">Display</a></li>
     </ul>
@@ -31,7 +35,6 @@
 </header>
 
 <main>
-
   <section id="introduction" class="section">
     <div class="container">
       <h1>Campus Information Website</h1>
@@ -97,18 +100,16 @@
     </div>
   </section>
 
-
   <section id="announcements" class="section">
     <div class="container">
-      <h2>Announcements & Notices</h2>
+      <h2>Announcements &amp; Notices</h2>
       <p>Important updates for all students.</p>
     </div>
 
     <div class="fixed-notice">
-      ⚠️ Registration closes this Friday. Please complete it on time.
+      Registration closes this Friday. Please complete it on time.
     </div>
   </section>
-
 
   <section id="display" class="section">
     <div class="container">
@@ -124,12 +125,30 @@
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer">
-  <p>© 2026 Campus Information Portal</p>
+  <p>&copy; 2026 Campus Information Portal</p>
 </footer>
+
+<script>
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
